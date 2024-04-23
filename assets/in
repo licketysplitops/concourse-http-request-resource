@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+
+import requests
+import sys
+import os
+import json
+
+destDir = sys.argv[1]
+try:
+    os.mkdir(destDir)
+except FileExistsError:
+    print ("{} exists".format(destDir))
+
+data = sys.stdin.read()
+obj = json.loads(data)
+uri = obj.get("source").get("uri")
+
+r = requests.get(uri)
+version = r.text
+out = {
+    "version": {
+        "id": version
+    },
+    "metadata": []
+}
+
+with open("{}/kubernetes_version.json".format(destDir), "w") as fd:
+    fd.write(json.dumps(out))
