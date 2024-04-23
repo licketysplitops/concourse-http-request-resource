@@ -13,6 +13,6 @@ r = requests.get(uri)
 version = r.text
  
 out = list()
-out.append({"id": version})
+out.append({"release": version})
 
 print(json.dumps(out))

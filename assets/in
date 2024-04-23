@@ -19,7 +19,7 @@ r = requests.get(uri)
 version = r.text
 out = {
     "version": {
-        "id": version
+        "release": version
     },
     "metadata": []
 }
